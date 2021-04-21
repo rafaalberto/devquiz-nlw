@@ -16,7 +16,7 @@ class Chart extends StatelessWidget {
               width: 80,
               child: CircularProgressIndicator(
                 strokeWidth: 10,
-                value: 0.75,
+                value: 0.50,
                 backgroundColor: AppColors.chartSecondary,
                 valueColor:
                     AlwaysStoppedAnimation<Color>(AppColors.chartPrimary),
@@ -24,7 +24,7 @@ class Chart extends StatelessWidget {
             ),
           ),
           Center(
-              child: Text("75%", style: AppTextStyles.heading,
+              child: Text("50%", style: AppTextStyles.heading,
           ))
         ],
       ),
