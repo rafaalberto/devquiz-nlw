@@ -1,4 +1,5 @@
 import 'package:dev_quiz/widgets/level_button_widget.dart';
+import 'package:dev_quiz/widgets/quiz_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:dev_quiz/widgets/app_bar_widget.dart';
 
@@ -13,15 +14,33 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBarWidget(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-            children: [
-              LevelButton(label: "Fácil"),
-              LevelButton(label: "Médio"),
-              LevelButton(label: "Difícil"),
-              LevelButton(label: "Perito"),
-        ]),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+              children: [
+                LevelButton(label: "Fácil"),
+                LevelButton(label: "Médio"),
+                LevelButton(label: "Difícil"),
+                LevelButton(label: "Perito"),
+            ]),
+            SizedBox(height: 24),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                children: [
+                  QuizCard(),
+                  QuizCard(),
+                  QuizCard(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
