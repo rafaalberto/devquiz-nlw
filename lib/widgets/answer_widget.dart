@@ -20,7 +20,7 @@ class AnswerWidget extends StatelessWidget {
 
   TextStyle get _selectedTextStyleRight => isRight ? AppTextStyles.bodyDarkGreen : AppTextStyles.bodyDarkRed;
 
-  IconData get _selectedIconRight => isRight ? Icons.check : Icons.close;
+  // IconData get _selectedIconRight => isRight ? Icons.check : Icons.close;
 
   @override
   Widget build(BuildContext context) {

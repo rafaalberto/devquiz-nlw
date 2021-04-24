@@ -1,8 +1,13 @@
 import 'package:dev_quiz/core/app_gradients.dart';
 import 'package:dev_quiz/core/app_text_styles.dart';
+import 'package:dev_quiz/models/user.dart';
 import 'package:flutter/material.dart';
 
 class AppBarProfile extends StatelessWidget {
+  final User user;
+
+  const AppBarProfile({ required this.user });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +20,7 @@ class AppBarProfile extends StatelessWidget {
         children: [
           Text.rich(
             TextSpan(text: "Olá, ", style: AppTextStyles.title, children: [
-              TextSpan(text: "Rafael", style: AppTextStyles.titleBold)
+              TextSpan(text: user.name, style: AppTextStyles.titleBold)
             ]),
           ),
           Container(
@@ -25,7 +30,7 @@ class AppBarProfile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: NetworkImage(
-                      "https://avatars.githubusercontent.com/u/7614218?v=4"),
+                      user.photoUrl),
                 )),
           )
         ],
