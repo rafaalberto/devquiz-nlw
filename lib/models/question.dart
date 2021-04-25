@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dev_quiz/models/answer.dart';
 
 class Question {
