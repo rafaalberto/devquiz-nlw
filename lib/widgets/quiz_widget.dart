@@ -1,11 +1,22 @@
 import 'package:dev_quiz/core/app_text_styles.dart';
+import 'package:dev_quiz/models/answer.dart';
+import 'package:dev_quiz/models/question.dart';
 import 'package:dev_quiz/widgets/answer_widget.dart';
 import 'package:flutter/material.dart';
 
-class QuizWidget extends StatelessWidget {
-  final String title;
+class QuizWidget extends StatefulWidget {
+  final Question question;
 
-  const QuizWidget({required this.title});
+  const QuizWidget({required this.question});
+
+  @override
+  _QuizWidgetState createState() => _QuizWidgetState();
+}
+
+class _QuizWidgetState extends State<QuizWidget> {
+  int indexSelected = -1;
+
+  Answer answer(int index) => widget.question.answers[index];
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +24,17 @@ class QuizWidget extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 32),
-          Text(title, style: AppTextStyles.heading),
+          Text(widget.question.title, style: AppTextStyles.heading),
           SizedBox(height: 32),
-          AnswerWidget(title: "Possibilita a criação de aplicativos compilados nativamente",isSelected: true, isRight: true,),
+          for (var index = 0; index < widget.question.answers.length; index++)
+            AnswerWidget(
+              answer: answer(index),
+              isSelected: indexSelected == index,
+              onTap: () {
+                indexSelected = index;
+                setState(() {});
+              },
+            )
         ],
       ),
     );
