@@ -6,9 +6,15 @@ import 'package:dev_quiz/core/app_colors.dart';
 class AnswerWidget extends StatelessWidget {
   final Answer answer;
   final bool isSelected;
+  final bool isDisabled;
   final VoidCallback onTap;
 
-  const AnswerWidget({required this.answer, this.isSelected = false, required this.onTap});
+  const AnswerWidget({
+    required this.answer,
+    this.isSelected = false,
+    required this.onTap,
+    this.isDisabled = false,
+  });
 
   Color get _selectedColorRight =>
       answer.isRight ? AppColors.darkGreen : AppColors.darkRed;
@@ -31,46 +37,51 @@ class AnswerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: isSelected ? _selectedColorCardRight : AppColors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.fromBorderSide(BorderSide(
-                color:
-                    isSelected ? _selectedBorderCardRight : AppColors.border)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  answer.title,
-                  style:
-                      isSelected ? _selectedTextStyleRight : AppTextStyles.body,
+      child: IgnorePointer(
+        ignoring: isDisabled,
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: isSelected ? _selectedColorCardRight : AppColors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.fromBorderSide(BorderSide(
+                  color: isSelected
+                      ? _selectedBorderCardRight
+                      : AppColors.border)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    answer.title,
+                    style: isSelected
+                        ? _selectedTextStyleRight
+                        : AppTextStyles.body,
+                  ),
                 ),
-              ),
-              Container(
-                height: 24,
-                width: 24,
-                decoration: BoxDecoration(
-                    color: isSelected ? _selectedColorRight : AppColors.white,
-                    borderRadius: BorderRadius.circular(500),
-                    border: Border.fromBorderSide(BorderSide(
-                        color: isSelected
-                            ? _selectedBorderRight
-                            : AppColors.border))),
-                child: isSelected
-                    ? Icon(
-                        Icons.check,
-                        size: 16,
-                        color: Colors.white,
-                      )
-                    : null,
-              ),
-            ],
+                Container(
+                  height: 24,
+                  width: 24,
+                  decoration: BoxDecoration(
+                      color: isSelected ? _selectedColorRight : AppColors.white,
+                      borderRadius: BorderRadius.circular(500),
+                      border: Border.fromBorderSide(BorderSide(
+                          color: isSelected
+                              ? _selectedBorderRight
+                              : AppColors.border))),
+                  child: isSelected
+                      ? Icon(
+                          Icons.check,
+                          size: 16,
+                          color: Colors.white,
+                        )
+                      : null,
+                ),
+              ],
+            ),
           ),
         ),
       ),
