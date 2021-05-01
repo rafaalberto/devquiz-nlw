@@ -8,8 +8,9 @@ import 'package:dev_quiz/widgets/quiz_widget.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<Question> questions;
+  final String title;
 
-  ChallengePage({required this.questions});
+  ChallengePage({required this.questions, required this.title});
 
   @override
   _ChallengePageState createState() => _ChallengePageState();
@@ -25,6 +26,13 @@ class _ChallengePageState extends State<ChallengePage> {
       challengeController.currentPage = pageController.page!.toInt() + 1;
     });
     super.initState();
+  }
+
+  void onSelected(bool value) {
+    if (value) {
+      challengeController.qtdRightAnswer++;
+    }
+    nextPage();
   }
 
   void nextPage() {
@@ -63,7 +71,7 @@ class _ChallengePageState extends State<ChallengePage> {
         children: widget.questions.map((e) {
           return QuizWidget(
             question: e,
-            onChange: nextPage,
+            onSelected: onSelected,
           );
         }).toList(),
       ),
@@ -85,12 +93,21 @@ class _ChallengePageState extends State<ChallengePage> {
                           if (value == widget.questions.length)
                             Expanded(
                                 child: NextButtonWidget.green(
-                              label: "Confirmar",
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ResultPage())),
-                            ))
+                                    label: "Confirmar",
+                                    onTap: () => {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (context) => ResultPage(
+                                                            title: widget.title,
+                                                            length: widget
+                                                                .questions
+                                                                .length,
+                                                            result: challengeController
+                                                                .qtdRightAnswer,
+                                                          ))),
+                                        }))
                         ]))),
       ),
     );
