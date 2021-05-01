@@ -1,4 +1,4 @@
-import 'package:dev_quiz/pages/home_page.dart';
+import 'package:dev_quiz/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +10,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "DevQuiz",
-        home: HomePage());
+        home: SplashPage());
   }
 }
