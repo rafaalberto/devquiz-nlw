@@ -13,7 +13,7 @@ class AppBarWidget extends PreferredSize {
             child: Stack(
               children: [
                 AppBarProfile(user: user),
-                Align(alignment: Alignment(0.0, 1.1), child: ScoreCardWidget()),
+                Align(alignment: Alignment(0.0, 1.1), child: ScoreCardWidget(percent: user.score/100,)),
               ],
             ),
           ),

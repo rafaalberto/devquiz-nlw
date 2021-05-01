@@ -4,6 +4,11 @@ import 'package:dev_quiz/widgets/chart_widget.dart';
 import 'package:flutter/material.dart';
 
 class ScoreCardWidget extends StatefulWidget {
+
+  final double percent;
+
+  const ScoreCardWidget({ required this.percent });
+
   @override
   _ScoreCardWidgetState createState() => _ScoreCardWidgetState();
 }
@@ -26,7 +31,7 @@ class _ScoreCardWidgetState extends State<ScoreCardWidget> {
             children: [
               Expanded(
                 flex: 1,
-                child: Chart(),
+                child: Chart(percent: widget.percent),
               ),
               Expanded(
                 flex: 3,
